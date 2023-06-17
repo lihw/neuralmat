@@ -5,9 +5,8 @@ An extensive review of neural material algorithms that have emerged in academic 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Algorithms](#algorithms)
+- [Algorithms](#algorithms) [Optimizing BRDFs](#optimizing-brdfs) [Neural BRDFs](#neural-brdfs)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -20,15 +19,14 @@ Neural material has been a popular research area in recent years, with two major
 
 As previously mentioned, we have categorized all recent neural material advances into two groups. 
 
-### Optimizing BRDF materials
+## Optimizing BRDFs
 
-- Algorithm 1: Brief description and key features
-- Algorithm 2: Brief description and key features
+- **Create mipmaps with neural network or gradient descent methods**. The goal is to improve the quality of normal, roughness, and height maps by creating mipmaps using neural network or gradient descent methods. This is a challenge because these signals cannot be easily linearly interpolated or will be transformed to anisotropic ones in another domain. For instance, the linear sum of two opposite normal vectors is zero, and the downsampled height maps may show anisotropic roughness. This approach aims to generate better results than using a simple Gaussian filter. Refer to [mipmap.md](optimize/mipmap.md) for algrithms addressing this problem.
 
-### Neural BRDF
+- **Compress SVBRDFs with neural network**. By utilizing the similarities between different channels of the SVBRDF textures, e.g., between roughness and albedo, we can further compress SVBRDFs down to a new level. 
 
-- Algorithm 3: Brief description and key features
-- Algorithm 4: Brief description and key features
+## Neural BRDFs
+
 
 ## Installation
 
@@ -52,4 +50,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - lihw81@gmail.com
 
-Project Link: https://github.com/lihw/neuralmat
+Project Link: https://github.com/lihw/neuralmat.git
