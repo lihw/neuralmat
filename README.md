@@ -5,7 +5,9 @@ An extensive review of neural material algorithms that have emerged in academic 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Algorithms](#algorithms) [Optimizing BRDFs](#optimizing-brdfs) [Neural BRDFs](#neural-brdfs)
+- [Algorithms](#algorithms) 
+    - [Optimizing BRDFs](#optimizing-brdfs) 
+    - [Neural BRDFs](#neural-brdfs)
 - [Installation](#installation)
 - [Contributing](#contributing)
 - [License](#license)
@@ -20,6 +22,8 @@ Neural material has been a popular research area in recent years, with two major
 As previously mentioned, we have categorized all recent neural material advances into two groups. 
 
 ## Optimizing BRDFs
+
+- **A few must-read papers about BRDF model**. These are specific papers that serve as prerequisites for neural material optimization. These papers delve into the modelling and sampling of micro-facet models, making them essential reading for individuals interested in this field. [microfacet.md](optimize/microfacet.md)
 
 - **Create mipmaps with neural network or gradient descent methods**. The goal is to improve the quality of normal, roughness, and height maps by creating mipmaps using neural network or gradient descent methods. This is a challenge because these signals cannot be easily linearly interpolated or will be transformed to anisotropic ones in another domain. For instance, the linear sum of two opposite normal vectors is zero, and the downsampled height maps may show anisotropic roughness. This approach aims to generate better results than using a simple Gaussian filter. Refer to [mipmap.md](optimize/mipmap.md) for algrithms addressing this problem.
 
