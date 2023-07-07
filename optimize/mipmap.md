@@ -101,12 +101,15 @@ A normal mipmap genreated by naive downsampling
 <img src="images/mip_normal_avg.png" alt="Naive downsample" style="display: block; margin: 0 auto;">
 
 ## LEAN Mapping
-This is a well-known paper which discusses a method that filters normal maps. The standard mipmaping (linear filtering) doesn't work for normal maps. It is because the downsampled normals will become the microstructures of the surface (e.g., roughness) that renders either anisotropic shading effects or still keeps the specularity lobes as if the full resolution of the normal map is used but seen afar. 
+This is a well-known paper which discusses a method that filters normal maps. The standard mipmaping (linear filtering) doesn't work for normal maps. It is because the downsampled normals will become the microstructures of the surface (e.g., the variance of microfacets represented by roughness) and therefore the specularity will disappear when viewed afar (roughness increases) or anisotropic shading effects show up. The naive downsampling, i.e., the mean of normals, can't achieve these effects.  
 
-On the other hand, we can linear filter the normal distributions/PDFs as long as these normal distributions are gaussian based and are defined in the same domain. Here comes the contributions of this paper. 
+To address this problem, the paper attenuates the meta-parameter of the shading equation which controls the specularity of the shading results. The meta-parameter is controlled by the variance of the normals in filtering region. The intuition is if variance of normals increases, the specularity should decrease (just like roughness). 
 
-1. Refactor the Beckmann shading model so the shading is computed in the geometry normal space instead of original bump space.
-2. Combine mean and moments to compute the convariance matrix of downsampled normal distribution 
+Here comes what exactly this paper does
+
+1. Use Beckmann shading instead of Phong because there is a "NDF" term in Beckmann which can be leveraged.
+2. Refactor the Beckmann shading model so the shading is computed in the texture space instead of the bump space. Then mean and variance computation can be chained.
+3. Combine mean and moments to compute the convariance matrix of downsampled normal distribution 
 
 ### Highlights
 - To demystify the Beckmann shading model $\frac{1}{2\pi\sqrt{\sum}}e^{-\frac{1}{2}\tilde{h}_b^T\sum \tilde{h}_b}$ 
